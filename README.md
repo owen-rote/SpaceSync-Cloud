@@ -7,10 +7,10 @@
 
 
 # Contributors:
-**Brenden Chen** - \
+**Brenden Chen** - Develop iOS app for computing JavaScript compute tasks remotely\
 **Owen Rotenberg** - Load balancer and cloud orchestrator API development\
 **Quan Le** - Create UI/UX design for mobile app using Figma\
-**Dylan Morales** -
+**Dylan Morales** - Create React front end for API orchestrator administration
 
 
 
