@@ -14,8 +14,13 @@ def get_db():
         db.close()
 
 
+# Post new task
 @router.post("/", response_model=schemas.TaskOut)
 def add_task(task: schemas.TaskCreate, db: Session = Depends(get_db)):
+
+    # Format " for JSON payload format
+    task.code = task.code.replace('"', '\\"')
+
     db_task = models.Task(code=task.code)
     db.add(db_task)
     db.commit()
@@ -30,19 +35,19 @@ def list_tasks(db: Session = Depends(get_db)):
 
 from fastapi import HTTPException
 
+
 # Get the next PENDING task from the line. Immediately change to IN_PROGRESS so no dupes get sent
 @router.get("/next", response_model=schemas.TaskOut)
 def get_next_task(db: Session = Depends(get_db)):
     task = db.query(models.Task).filter_by(status=models.TaskStatus.PENDING).first()
     if not task:
         raise HTTPException(status_code=404, detail="No pending task")
-    
+
     task.status = models.TaskStatus.IN_PROGRESS  # 'PENDING' -> 'IN_PROGRESS'
     db.commit()
     db.refresh(task)
 
     return task
-
 
 
 @router.put("/{task_id}/claim", response_model=schemas.TaskOut)
