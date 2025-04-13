@@ -19,7 +19,7 @@ def get_db():
 def add_task(task: schemas.TaskCreate, db: Session = Depends(get_db)):
 
     # Format " for JSON payload format
-    #task.code = task.code.replace('"', '\\"')
+    # task.code = task.code.replace('"', '\\"')
 
     db_task = models.Task(code=task.code)
     db.add(db_task)
@@ -47,18 +47,6 @@ def get_next_task(db: Session = Depends(get_db)):
     db.commit()
     db.refresh(task)
 
-    return task
-
-
-@router.put("/{task_id}/claim", response_model=schemas.TaskOut)
-def claim_task(task_id: int, device_id: int, db: Session = Depends(get_db)):
-    task = db.query(models.Task).get(task_id)
-    if not task:
-        raise HTTPException(status_code=404, detail="Task not found")
-    task.status = models.TaskStatus.IN_PROGRESS
-    task.device_id = device_id
-    db.commit()
-    db.refresh(task)
     return task
 
 
