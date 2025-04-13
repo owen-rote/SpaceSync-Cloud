@@ -19,7 +19,7 @@ def get_db():
 def add_task(task: schemas.TaskCreate, db: Session = Depends(get_db)):
 
     # Format " for JSON payload format
-    task.code = task.code.replace('"', '\\"')
+    #task.code = task.code.replace('"', '\\"')
 
     db_task = models.Task(code=task.code)
     db.add(db_task)
