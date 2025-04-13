@@ -57,8 +57,13 @@ def complete_task(
     task = db.query(models.Task).get(task_id)
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
+    
     task.status = update.status
     task.result = update.result
+
+    if update.device_id is not None:
+        task.device_id = update.device_id
+        
     db.commit()
     db.refresh(task)
     return task
