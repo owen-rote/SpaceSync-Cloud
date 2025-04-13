@@ -28,12 +28,21 @@ def list_tasks(db: Session = Depends(get_db)):
     return db.query(models.Task).all()
 
 
+from fastapi import HTTPException
+
+# Get the next PENDING task from the line. Immediately change to IN_PROGRESS so no dupes get sent
 @router.get("/next", response_model=schemas.TaskOut)
 def get_next_task(db: Session = Depends(get_db)):
     task = db.query(models.Task).filter_by(status=models.TaskStatus.PENDING).first()
     if not task:
         raise HTTPException(status_code=404, detail="No pending task")
+    
+    task.status = models.TaskStatus.IN_PROGRESS  # 'PENDING' -> 'IN_PROGRESS'
+    db.commit()
+    db.refresh(task)
+
     return task
+
 
 
 @router.put("/{task_id}/claim", response_model=schemas.TaskOut)

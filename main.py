@@ -6,10 +6,11 @@ from database import Base, engine
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title="iPhone Cluster Orchestrator",
+    title="SpaceSync Cloud Orchestrator",
     description="REST API for distributed compute tasks on iPhones",
     version="1.0.0",
 )
+
 
 app.add_middleware(
     CORSMiddleware,
