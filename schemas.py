@@ -33,4 +33,4 @@ class TaskOut(BaseModel):
 class TaskUpdate(BaseModel):
     status: TaskStatus
     result: Optional[str] = None
-    device_id: Optional[str] = None
+
