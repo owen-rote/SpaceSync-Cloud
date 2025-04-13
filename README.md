@@ -13,3 +13,11 @@ Windows:
 `uvicorn main:app --reload`
 
 http://localhost:8000/docs#/
+
+
+TODO:
+Role based access control
+
+Connect tasks to clients
+Connect tasks to which device handled it
+Connect users to their device

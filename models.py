@@ -22,5 +22,4 @@ class Task(Base):
     code = Column(Text)
     status = Column(Enum(TaskStatus), default=TaskStatus.PENDING)
     result = Column(Text, nullable=True)
-    device_id = Column(Integer, ForeignKey("devices.id"), nullable=True)
-    device = relationship("Device")
+
