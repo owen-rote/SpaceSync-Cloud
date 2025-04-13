@@ -8,7 +8,7 @@
 # Contributors:
 **Brenden Chen** - \
 **Owen Rotenberg** - Load balancer and cloud orchestrator API development\
-**Quan Le** - \
+**Quan Le** - Create UI/UX design for mobile app using Figma\
 **Dylan last name** -
 
 
