@@ -9,152 +9,146 @@ create_curl_request() {
     -d "{ \"code\": \"$1\" }"
 }
 
-# 1. Return a number
-create_curl_request "function returnNumber() { return 42; } returnNumber();"
+# 1. Large prime number check
+create_curl_request "function isPrime(n) { if (n <= 1) return false; for (let i = 2; i * i <= n; i++) { if (n % i === 0) return false; } return true; } isPrime(982451653);"
 
-# 2. Return a string
-create_curl_request "function returnString() { return 'Hello, World!'; } returnString();"
+# 2. Fibonacci (recursive, heavy)
+create_curl_request "function fib(n) { return n <= 1 ? n : fib(n - 1) + fib(n - 2); } fib(35);"
 
-# 3. Return an array
-create_curl_request "function returnArray() { return [1, 2, 3, 4]; } returnArray();"
+# 3. Sort 10,000 random numbers
+create_curl_request "function sortLargeArray() { const arr = Array.from({ length: 10000 }, () => Math.random()); return arr.sort(); } sortLargeArray();"
 
-# 4. Return an object
-create_curl_request "function returnObject() { return { name: 'Alice', age: 25 }; } returnObject();"
+# 4. Matrix multiplication (100x100)
+create_curl_request "function matrixMultiply(n) { const A = [], B = [], C = []; for (let i = 0; i < n; i++) { A[i] = []; B[i] = []; C[i] = []; for (let j = 0; j < n; j++) { A[i][j] = Math.random(); B[i][j] = Math.random(); C[i][j] = 0; } } for (let i = 0; i < n; i++) { for (let j = 0; j < n; j++) { for (let k = 0; k < n; k++) { C[i][j] += A[i][k] * B[k][j]; } } } return C[0][0]; } matrixMultiply(100);"
 
-# 5. Return a boolean
-create_curl_request "function returnBoolean() { return true; } returnBoolean();"
+# 5. Compute SHA-256 hash (simulated, not crypto-secure)
+create_curl_request "function fakeHash(str) { let hash = 0; for (let i = 0; i < str.length; i++) { hash = ((hash << 5) - hash) + str.charCodeAt(i); hash |= 0; } return hash; } fakeHash('This is a long string used for hashing test');"
 
-# 6. Return a sum
-create_curl_request "function returnSum() { return 5 + 10; } returnSum();"
+# 6. Generate and sum 1 million random numbers
+create_curl_request "function sumLargeArray() { let total = 0; for (let i = 0; i < 1e6; i++) total += Math.random(); return total; } sumLargeArray();"
 
-# 7. Return a subtraction
-create_curl_request "function returnSubtraction() { return 20 - 5; } returnSubtraction();"
+# 7. Monte Carlo Pi estimation
+create_curl_request "function estimatePi(samples) { let inside = 0; for (let i = 0; i < samples; i++) { const x = Math.random(), y = Math.random(); if (x * x + y * y <= 1) inside++; } return (4 * inside / samples); } estimatePi(1e6);"
 
-# 8. Return a multiplication
-create_curl_request "function returnMultiplication() { return 4 * 6; } returnMultiplication();"
+# 8. Recursive factorial (large number)
+create_curl_request "function factorial(n) { return n <= 1 ? 1 : n * factorial(n - 1); } factorial(25);"
 
-# 9. Return a division
-create_curl_request "function returnDivision() { return 100 / 5; } returnDivision();"
+# 9. Deep nested object creation
+create_curl_request "function deepObject(depth) { let obj = {}; let current = obj; for (let i = 0; i < depth; i++) { current['level' + i] = {}; current = current['level' + i]; } return obj; } deepObject(1000);"
 
-# 10. Return a string length
-create_curl_request "function returnStringLength() { return 'JavaScript'.length; } returnStringLength();"
+# 10. Simulate basic neural net layer (dot product)
+create_curl_request "function denseLayer(inputSize, outputSize) { const input = Array.from({ length: inputSize }, () => Math.random()); const weights = Array.from({ length: outputSize }, () => Array.from({ length: inputSize }, () => Math.random())); const output = Array(outputSize).fill(0); for (let i = 0; i < outputSize; i++) { for (let j = 0; j < inputSize; j++) { output[i] += weights[i][j] * input[j]; } } return output; } denseLayer(512, 128);"
+# 11. Generate first 10,000 prime numbers
+create_curl_request "function generatePrimes() {
+  const primes = []; let num = 2;
+  while (primes.length < 10000) {
+    if (primes.every(p => num % p !== 0)) primes.push(num);
+    num++;
+  }
+  return primes;
+} generatePrimes();"
 
-# 11. Return a random number
-create_curl_request "function returnRandom() { return Math.random(); } returnRandom();"
+# 12. Calculate large Fibonacci number (recursive with memo)
+create_curl_request "function fib(n, memo = {}) {
+  if (n <= 1) return n;
+  if (memo[n]) return memo[n];
+  return memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
+} fib(35);"
 
-# 12. Return a rounded number
-create_curl_request "function returnRounded() { return Math.round(4.7); } returnRounded();"
+# 13. Multiply large matrices
+create_curl_request "function multiplyMatrices() {
+  const size = 100; const A = [], B = [], C = [];
+  for (let i = 0; i < size; i++) {
+    A[i] = []; B[i] = []; C[i] = [];
+    for (let j = 0; j < size; j++) {
+      A[i][j] = Math.random(); B[i][j] = Math.random(); C[i][j] = 0;
+    }
+  }
+  for (let i = 0; i < size; i++)
+    for (let j = 0; j < size; j++)
+      for (let k = 0; k < size; k++)
+        C[i][j] += A[i][k] * B[k][j];
+  return C[0][0];
+} multiplyMatrices();"
 
-# 13. Return a power
-create_curl_request "function returnPower() { return Math.pow(2, 3); } returnPower();"
+# 14. SHA-256 hashing many times
+create_curl_request "async function hashLoop() {
+  let msg = new TextEncoder().encode('hello');
+  for (let i = 0; i < 10000; i++) {
+    msg = new Uint8Array(await crypto.subtle.digest('SHA-256', msg));
+  }
+  return Array.from(msg).slice(0, 5);
+} hashLoop();"
 
-# 14. Return the square root
-create_curl_request "function returnSqrt() { return Math.sqrt(16); } returnSqrt();"
+# 15. Simulate particle motion
+create_curl_request "function simulateParticles() {
+  let particles = Array.from({ length: 10000 }, () => ({ x: 0, y: 0, vx: Math.random(), vy: Math.random() }));
+  for (let t = 0; t < 100; t++) {
+    particles = particles.map(p => ({ ...p, x: p.x + p.vx, y: p.y + p.vy }));
+  }
+  return particles[0];
+} simulateParticles();"
 
-# 15. Return a string to uppercase
-create_curl_request "function returnUpperCase() { return 'hello'.toUpperCase(); } returnUpperCase();"
+# 16. Generate permutations of 9 elements
+create_curl_request "function permute(arr) {
+  const result = [];
+  const helper = (current, rest) => {
+    if (!rest.length) return result.push(current);
+    for (let i = 0; i < rest.length; i++) {
+      helper(current.concat(rest[i]), rest.slice(0, i).concat(rest.slice(i + 1)));
+    }
+  };
+  helper([], arr);
+  return result.length;
+} permute([1,2,3,4,5,6,7,8,9]);"
 
-# 16. Return a string to lowercase
-create_curl_request "function returnLowerCase() { return 'HELLO'.toLowerCase(); } returnLowerCase();"
+# 17. Monte Carlo estimate of PI
+create_curl_request "function monteCarloPI() {
+  let inside = 0, total = 1000000;
+  for (let i = 0; i < total; i++) {
+    const x = Math.random(), y = Math.random();
+    if (x * x + y * y <= 1) inside++;
+  }
+  return (4 * inside / total).toFixed(6);
+} monteCarloPI();"
 
-# 17. Return the first character of a string
-create_curl_request "function returnFirstChar() { return 'hello'.charAt(0); } returnFirstChar();"
+# 18. Pathfinding in a grid (brute-force DFS)
+create_curl_request "function countPaths(n) {
+  const dfs = (x, y) => (x === n && y === n) ? 1 : 0 +
+    (x < n ? dfs(x + 1, y) : 0) +
+    (y < n ? dfs(x, y + 1) : 0);
+  return dfs(0, 0);
+} countPaths(10);"
 
-# 18. Return the last character of a string
-create_curl_request "function returnLastChar() { return 'hello'.charAt('hello'.length - 1); } returnLastChar();"
+# 19. Matrix determinant (recursive)
+create_curl_request "function determinant(m) {
+  const n = m.length;
+  if (n === 1) return m[0][0];
+  if (n === 2) return m[0][0]*m[1][1] - m[0][1]*m[1][0];
+  let det = 0;
+  for (let i = 0; i < n; i++) {
+    const sub = m.slice(1).map(r => r.filter((_, j) => j !== i));
+    det += (i % 2 === 0 ? 1 : -1) * m[0][i] * determinant(sub);
+  }
+  return det;
+} determinant([[1,2,3],[4,5,6],[7,8,9]]);"
 
-# 19. Return the index of a character
-create_curl_request "function returnCharIndex() { return 'hello'.indexOf('e'); } returnCharIndex();"
-
-# 20. Return a string with spaces trimmed
-create_curl_request "function returnTrimmedString() { return '  hello  '.trim(); } returnTrimmedString();"
-
-# 21. Return a reversed string
-create_curl_request "function returnReversedString() { return 'hello'.split('').reverse().join(''); } returnReversedString();"
-
-# 22. Return a simple object from a function
-create_curl_request "function returnSimpleObject() { return { key: 'value' }; } returnSimpleObject();"
-
-# 23. Return a concatenated string
-create_curl_request "function returnConcatenated() { return 'Hello, ' + 'World!'; } returnConcatenated();"
-
-# 24. Return a string with template literals
-create_curl_request "function returnTemplateLiteral() { return \`Hello, \${'World'}!\`; } returnTemplateLiteral();"
-
-# 25. Return the current date
-create_curl_request "function returnCurrentDate() { return new Date(); } returnCurrentDate();"
-
-# 26. Return the current year
-create_curl_request "function returnCurrentYear() { return new Date().getFullYear(); } returnCurrentYear();"
-
-# 27. Return the current month
-create_curl_request "function returnCurrentMonth() { return new Date().getMonth() + 1; } returnCurrentMonth();"
-
-# 28. Return the current day
-create_curl_request "function returnCurrentDay() { return new Date().getDate(); } returnCurrentDay();"
-
-# 29. Return the current time
-create_curl_request "function returnCurrentTime() { return new Date().toLocaleTimeString(); } returnCurrentTime();"
-
-# 30. Return a boolean check
-create_curl_request "function returnIsEven() { return 10 % 2 === 0; } returnIsEven();"
-
-# 31. Return an even number check
-create_curl_request "function returnEvenCheck() { return 4 % 2 === 0; } returnEvenCheck();"
-
-# 32. Return an odd number check
-create_curl_request "function returnOddCheck() { return 5 % 2 !== 0; } returnOddCheck();"
-
-# 33. Return the factorial of a number
-create_curl_request "function returnFactorial() { let num = 5; let result = 1; for (let i = 1; i <= num; i++) { result *= i; } return result; } returnFactorial();"
-
-# 34. Return a number squared
-create_curl_request "function returnSquared() { return 5 * 5; } returnSquared();"
-
-# 35. Return a reversed array
-create_curl_request "function returnReversedArray() { return [1, 2, 3].reverse(); } returnReversedArray();"
-
-# 36. Return a sorted array
-create_curl_request "function returnSortedArray() { return [3, 1, 2].sort(); } returnSortedArray();"
-
-# 37. Return a random integer between 1 and 10
-create_curl_request "function returnRandomInt() { return Math.floor(Math.random() * 10) + 1; } returnRandomInt();"
-
-# 38. Return a date formatted to string
-create_curl_request "function returnFormattedDate() { return new Date().toLocaleDateString(); } returnFormattedDate();"
-
-# 39. Return a string with numbers replaced
-create_curl_request "function returnReplacedString() { return 'hello 123'.replace('123', 'world'); } returnReplacedString();"
-
-# 40. Return a string split by spaces
-create_curl_request "function returnSplitString() { return 'hello world'.split(' '); } returnSplitString();"
-
-# 41. Return a string without vowels
-create_curl_request "function returnWithoutVowels() { return 'hello'.replace(/[aeiou]/gi, ''); } returnWithoutVowels();"
-
-# 42. Return the maximum number
-create_curl_request "function returnMax() { return Math.max(1, 2, 3, 4, 5); } returnMax();"
-
-# 43. Return the minimum number
-create_curl_request "function returnMin() { return Math.min(1, 2, 3, 4, 5); } returnMin();"
-
-# 44. Return the absolute value
-create_curl_request "function returnAbsolute() { return Math.abs(-5); } returnAbsolute();"
-
-# 45. Return a string with an appended word
-create_curl_request "function returnAppendedString() { return 'hello'.concat(' world'); } returnAppendedString();"
-
-# 46. Return the remainder of division
-create_curl_request "function returnRemainder() { return 10 % 3; } returnRemainder();"
-
-# 47. Return a negative number check
-create_curl_request "function returnNegativeCheck() { return -5 < 0; } returnNegativeCheck();"
-
-# 48. Return the square of a number
-create_curl_request "function returnSquaredNumber() { return Math.pow(5, 2); } returnSquaredNumber();"
-
-# 49. Return the sum of numbers in an array
-create_curl_request "function returnArraySum() { return [1, 2, 3, 4].reduce((acc, val) => acc + val, 0); } returnArraySum();"
-
-# 50. Return the character code of a string
-create_curl_request "function returnCharCode() { return 'A'.charCodeAt(0); } returnCharCode();"
+# 20. Generate Mandelbrot set
+create_curl_request "function mandelbrot(width, height) {
+  const maxIter = 100; const output = [];
+  for (let x = 0; x < width; x++) {
+    for (let y = 0; y < height; y++) {
+      let zx = 0, zy = 0;
+      const cx = (x - width/2) / (width/4), cy = (y - height/2) / (height/4);
+      let iter = 0;
+      while (zx*zx + zy*zy < 4 && iter < maxIter) {
+        const tmp = zx*zx - zy*zy + cx;
+        zy = 2*zx*zy + cy;
+        zx = tmp;
+        iter++;
+      }
+      output.push(iter);
+    }
+  }
+  return output.slice(0, 10);
+} mandelbrot(100, 100);"
