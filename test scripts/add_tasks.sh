@@ -2,11 +2,11 @@
 
 # Function to create a POST request with a curl command
 create_curl_request() {
-  echo "curl -X 'POST' \\
-  'http://localhost:8000/tasks/' \\
-  -H 'accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -d '{ \"code\": \"$1\" }'"
+  curl -X 'POST' \
+    'http://localhost:8000/tasks/' \
+    -H 'accept: application/json' \
+    -H 'Content-Type: application/json' \
+    -d "{ \"code\": \"$1\" }"
 }
 
 # 1. Return a number
