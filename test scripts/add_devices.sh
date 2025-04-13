@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # List of device names (you can modify this as needed)
-device_names=("Brenden's Phone")
+device_names=("Brendan's Phone")
 
 # Loop through each device name
 for name in "${device_names[@]}"
