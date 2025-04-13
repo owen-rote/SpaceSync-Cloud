@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # List of device names (you can modify this as needed)
-device_names=("Brendan's Phone")
+device_names=("Brendan's Phone" "Owen's iPhone" "Quan's iPhone")
 
 # Loop through each device name
 for name in "${device_names[@]}"
@@ -13,6 +13,5 @@ do
     -H 'Content-Type: application/json' \
     -d "{\"name\": \"$name\"}"
 
-  # Optional: add a sleep delay between requests
   sleep 1
 done
