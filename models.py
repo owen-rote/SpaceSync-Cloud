@@ -3,15 +3,18 @@ from sqlalchemy.orm import relationship
 from database import Base
 import enum
 
+
 class TaskStatus(str, enum.Enum):
     PENDING = "PENDING"
     IN_PROGRESS = "IN_PROGRESS"
     COMPLETE = "COMPLETE"
 
+
 class Device(Base):
     __tablename__ = "devices"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
+
 
 class Task(Base):
     __tablename__ = "tasks"

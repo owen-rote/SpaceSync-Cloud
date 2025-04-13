@@ -4,7 +4,6 @@ import models, schemas
 from database import SessionLocal
 from typing import List
 
-
 router = APIRouter()
 
 
@@ -25,6 +24,6 @@ def register_device(device: schemas.DeviceCreate, db: Session = Depends(get_db))
     return db_device
 
 
-@router.get("/", response_model=list[schemas.TaskOut])
+@router.get("/", response_model=list[schemas.DeviceOut])
 def device_list(db: Session = Depends(get_db)):
     return db.query(models.Device).all()
