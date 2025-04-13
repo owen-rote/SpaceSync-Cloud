@@ -1,4 +1,19 @@
-To Run:
+# SpaceSync Cloud
+#### A sustainable distributed cloud powered by people’s idle iPhones, turning everyday devices into a global supercomputer for AI training, gene research, and next-gen compute. No data centers needed.
+
+# Mobile App Repository:
+### https://github.com/brendan-ch/SpaceSyncNodeApp
+
+
+# Contributors:
+**Brenden Chen** - \
+**Owen Rotenberg** - Load balancer and cloud orchestrator API development\
+**Quan Le** - \
+**Dylan last name** -
+
+
+
+## To Run:
 
 `python -m venv venv`
 
@@ -14,10 +29,3 @@ Windows:
 
 http://localhost:8000/docs#/
 
-
-TODO:
-Role based access control
-
-Connect tasks to clients
-Connect tasks to which device handled it
-Connect users to their device
