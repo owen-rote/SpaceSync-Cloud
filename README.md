@@ -3,6 +3,7 @@
 
 # Mobile App Repository:
 ### https://github.com/brendan-ch/SpaceSyncNodeApp
+**UI/UX Repo:** https://github.com/quanle3001/SpaceSync-UI-UX-Design
 
 
 # Contributors:
