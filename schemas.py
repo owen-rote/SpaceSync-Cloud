@@ -33,4 +33,3 @@ class TaskOut(BaseModel):
 class TaskUpdate(BaseModel):
     status: TaskStatus
     result: Optional[str] = None
-

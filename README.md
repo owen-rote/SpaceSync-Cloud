@@ -3,7 +3,8 @@
 
 # Mobile App Repository:
 ### https://github.com/brendan-ch/SpaceSyncNodeApp
-**UI/UX Repo:** https://github.com/quanle3001/SpaceSync-UI-UX-Design \
+
+**App UI/UX Repo:** https://github.com/quanle3001/SpaceSync-UI-UX-Design \
 **React Frontend Repo:** https://github.com/dylamborghini/spacesync-front
 
 
@@ -12,8 +13,6 @@
 **Owen Rotenberg** - Load balancer and cloud orchestrator API development\
 **Quan Le** - Create UI/UX design for mobile app using Figma\
 **Dylan Morales** - Create React front end for API orchestrator administration
-
-
 
 ## To Run:
 
